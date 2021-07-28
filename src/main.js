@@ -5,13 +5,18 @@ import router from './router'
 import store from './store'
 import ViewUI from 'view-design'
 import 'view-design/dist/styles/iview.css'
+
 import dotenv from 'dotenv'
+import YoutubeCard from './components/YoutubeCard.vue'
 
 dotenv.config()
+require('dotenv').config()
 
 Vue.use(ViewUI)
 
-Vue.config.productionTip = false
+Vue.component('YoutubeCard', YoutubeCard)
+
+Vue.config.productionTip = true
 
 new Vue({
   router,
