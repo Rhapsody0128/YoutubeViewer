@@ -1,4 +1,4 @@
 <template lang="pug">
-  #about
+  #search
     h1 3asda
 </template>

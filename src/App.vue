@@ -2,15 +2,13 @@
   #app
     #nav
       router-link(to="/") Home /
-      router-link(to="/about") About
+      router-link(to="/Search") Search
     router-view
 </template>
 <script>
 export default {
   mounted () {
-    window.gapi.client.load('youtube', 'v3', function () {
-      window.gapi.client.setApiKey(process.env.VUE_APP_YOUTUBE_API)
-    })
+
   }
 }
 </script>
