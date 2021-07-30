@@ -106,7 +106,7 @@ export default {
     }
   },
   async mounted () {
-    await window.gapi.client.load('https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest')
+    await window.gapi.client.load('youtube', 'v3')
     await window.gapi.client.setApiKey(process.env.VUE_APP_YOUTUBE_API)
   }
 }

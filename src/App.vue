@@ -17,6 +17,8 @@
             Avatar(icon="ios-person" size="45")
     router-view()
 </template>
+<script src="https://apis.google.com/js/api.js"></script>
+<script src="https://apis.google.com/js/client.js"></script>
 <script>
 export default {
   data () {
@@ -29,14 +31,22 @@ export default {
     // v-if='name.length>0'
     async login () {
       var name = ''
-      await window.gapi.auth2.getAuthInstance()
-        .signIn({ scope: 'https://www.googleapis.com/auth/youtube.readonly' })
-        .then(function (res) {
-          name = res.Ts.TR
-          console.log('Sign-in successful')
-        }, function (err) {
-          console.error('Error signing in', err)
+      await window.gapi.load('auth2', function() {
+        window.gapi.auth2.init({
+          apiKey: process.env.VUE_APP_YOUTUBE_API,
+          clientId: process.env.VUE_APP_CLIENT_ID,
+          scope:'https://www.googleapis.com/auth/youtube.readonly'
         })
+        window.gapi.auth2.getAuthInstance()
+          .signIn({ scope: 'https://www.googleapis.com/auth/youtube.readonly' })
+          .then(function (res) {
+            console.log(res);
+            name = res.Ts.TR
+            console.log('Sign-in successful')
+          }, function (err) {
+            console.error('Error signing in', err)
+          })
+      });
       this.name = name
     },
     checkLogout () {
@@ -51,13 +61,7 @@ export default {
       this.name = ''
     }
   },
-  async mounted () {
-    try {
-      await window.gapi.load('client:auth2')
-      await window.gapi.auth2.init({ client_id: process.env.VUE_APP_CLIENT_ID })
-    } catch (error) {
-      console.log(error)
-    }
+  mounted () {
   }
 }
 </script>
