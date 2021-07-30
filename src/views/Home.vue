@@ -21,7 +21,7 @@ export default {
           'snippet,contentDetails,statistics'
         ],
         regionCode: 'tw',
-        maxResults: 10,
+        maxResults: 50,
         chart: 'mostPopular'
       })
       var cards = []
@@ -48,8 +48,8 @@ export default {
     }
   },
   async mounted () {
-    await window.gapi.client.load('youtube', 'v3')
     await window.gapi.client.setApiKey(process.env.VUE_APP_YOUTUBE_API)
+    await window.gapi.client.load('youtube', 'v3')
     this.recommend()
   }
 }

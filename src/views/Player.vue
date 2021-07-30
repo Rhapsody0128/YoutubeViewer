@@ -51,8 +51,6 @@ export default {
     },
     select () {
       this.drawerToggle = false
-      console.log('object')
-      // this.$root.reload()
       this.$router.go(0)
     },
     getData () {
@@ -79,7 +77,7 @@ export default {
         part: [
           'snippet'
         ],
-        maxResults: 15,
+        maxResults: 50,
         regionCode: 'TW',
         relatedToVideoId: this.videoId,
         type: 'video'
@@ -88,7 +86,6 @@ export default {
       request.execute(function (response) {
         response.items.map(item => {
           try {
-            console.log(item)
             if (!item.id.playlistId) {
               var card = {}
               card.id = item.id.videoId
@@ -118,6 +115,7 @@ export default {
 </script>
 <style lang="stylus">
 #player
+  margin-top 1rem
   background white
   height 100%
   .channelTitle

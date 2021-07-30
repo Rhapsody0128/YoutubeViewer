@@ -74,7 +74,7 @@ export default {
           'snippet'
         ],
         eventType: this.eventType,
-        maxResults: 10,
+        maxResults: 50,
         order: this.order,
         q: this.searchValue,
         regionCode: 'TW',
