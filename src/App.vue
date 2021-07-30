@@ -1,11 +1,9 @@
 <template lang="pug">
   #app
-    Modal(v-model="confirmLogout" title="Common Modal dialog box title" @on-ok="logout()" @on-cancel="cancel()")
-        <p>Content of dialog</p>
-        <p>Content of dialog</p>
-        <p>Content of dialog</p>
+    Modal(v-model="confirmLogout" title="登出" @on-ok="logout()" @on-cancel="cancel()")
+      h2 {{name}}，即將登出您的帳號
     #nav
-      Menu.navBar(mode="horizontal" active-name="home")
+      Menu.navBar(mode="horizontal" active-name="")
         MenuItem(name="home" to="/")
           .logoAndWord
             Icon.logo(type="logo-youtube" size="45")
@@ -13,9 +11,9 @@
         MenuItem(name="search" to="/Search")
           h1 搜尋
         MenuItem.login(name="login" )
-          .googleInfo(v-if='name.length>0' @click="checkLogout()")
+          .googleInfo(@click="checkLogout()")
             Avatar(size="45" ) {{name}}
-          .googleInfo(v-else @click="login()")
+          .googleInfo(@click="login()")
             Avatar(icon="ios-person" size="45")
     router-view()
 </template>
@@ -28,6 +26,8 @@ export default {
     }
   },
   methods: {
+    // v-if='name.length>0'
+    // v-else
     async login () {
       await window.gapi.auth2.getAuthInstance()
         .signIn({ scope: 'https://www.googleapis.com/auth/youtube.readonly' })
