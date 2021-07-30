@@ -32,37 +32,13 @@ export default {
       await window.gapi.auth2.getAuthInstance()
         .signIn({ scope: 'https://www.googleapis.com/auth/youtube.readonly' })
         .then(function (res) {
-          console.log(res)
-          this.name = res.tt.Ad
+          this.name = res.Ts.TR
           console.log('Sign-in successful')
         }, function (err) {
           console.error('Error signing in', err)
         })
-      // const auth2 = window.gapi.auth2.getAuthInstance()// 取得GoogleAuth物件
-      // await auth2.signIn().then(function (GoogleUser) {
-      //   this.name = GoogleUser.tt.Ad
-      //   window.gapi.client.people.people.get({
-      //     resourceName: 'people/me',
-      //     // 通常你會想要知道的用戶個資↓
-      //     personFields: 'names,emailAddresses,photos'
-      //   }).then(function (res) {
-      //     // success
-      //     console.log(res)
-      //     console.log(res.result)
-      //   })
-      //   console.log(name)
-      //   console.log(id)
-      //   console.log(photoSrc)
-      //   console.log(googlemail)
-      // },
-      // function (error) {
-      //   console.log('Google登入失敗')
-      //   console.log(error)
-      // })
-      // this.$router.go(0)
     },
     checkLogout () {
-      console.log(this.name.length)
       this.confirmLogout = true
     },
     cancel () {
@@ -78,13 +54,6 @@ export default {
     window.gapi.load('client:auth2', function () {
       window.gapi.auth2.init({ client_id: process.env.VUE_APP_CLIENT_ID })
     })
-    // window.gapi.load('client', function () {
-    //   window.gapi.client.init({
-    //     clientId: process.env.VUE_APP_CLIENT_ID,
-    //     scope: 'profile',
-    //     discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/people/v1/rest']
-    //   })
-    // })
   }
 }
 </script>
