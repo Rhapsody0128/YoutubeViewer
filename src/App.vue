@@ -63,7 +63,6 @@ export default {
     }
   },
   mounted () {
-    console.log(process.env.VUE_APP_CLIENT_ID)
     window.gapi.load('client', function () {
       window.gapi.client.init({
         clientId: process.env.VUE_APP_CLIENT_ID,
