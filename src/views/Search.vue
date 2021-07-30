@@ -43,14 +43,13 @@
                 span 瀏覽數
               Radio(label='rating')
                 span 評分
-          Button(style="margin:50px" type="primary" icon="ios-search" @click='search()') Search
       Layout.contentanier
         Header.header
           Row.search(:gutter="8" type="flex" justify="center")
-            Col(:xs="20" :md="10")
-              Input(v-model='searchValue' placeholder='今天想看...' :clearable='true')
-            Col(:xs="20" :md="1")
-              Button(type="primary" icon="ios-search" @click='search()') Search
+            Col(:xs="18" :md="14")
+              Input(v-model='searchValue' placeholder='今天想看...' :clearable='true' size='large')
+            Col
+              Button(type="primary" icon="ios-search" @click='search()' size='large' shape="circle")
         Content
           Row(:gutter="8" type="flex" justify="start")
             Col(v-for="(card , index) in cards" :key='index' span="24")
@@ -87,15 +86,19 @@ export default {
       var cards = []
       request.execute(function (response) {
         response.items.map(item => {
-          if (!item.id.playlistId) {
-            var card = {}
-            card.id = item.id.videoId
-            card.title = item.snippet.title
-            card.url = 'https://www.youtube.com/embed/' + card.id
-            card.description = item.snippet.description
-            card.channelTitle = item.snippet.channelTitle
-            card.src = 'http://img.youtube.com/vi/' + card.id + '/0.jpg'
-            cards.push(card)
+          try {
+            if (!item.id.playlistId) {
+              var card = {}
+              card.id = item.id.videoId
+              card.title = item.snippet.title
+              card.url = 'https://www.youtube.com/embed/' + card.id
+              card.description = item.snippet.description
+              card.channelTitle = item.snippet.channelTitle
+              card.src = 'http://img.youtube.com/vi/' + card.id + '/0.jpg'
+              cards.push(card)
+            }
+          } catch (error) {
+            console.log(error)
           }
         })
       })
@@ -112,13 +115,13 @@ export default {
 #search
   height 100%
   .sider
-    padding 0.5rem
     background white
     z-index 1
     height 100%
     .menu
       margin-top 3rem
       background white
+      padding 1rem
   .contentanier
     background white
     height 100%

@@ -64,11 +64,11 @@ export default {
   transform translate(-30%,-30%) rotate(30deg)
 
 .img2
-  width:320px
+  width:100%
   height:200px
   position relative
   img
-    width 300px
+    width 100%
     height 100%
     object-fit cover
 

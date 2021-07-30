@@ -26,18 +26,21 @@ export default {
       })
       var cards = []
       request.execute(function (response) {
-        // 將結果把所需部分進行擷取
         response.items.map(item => {
-          if (!item.id.playlistId) {
-            var card = {}
-            card.id = item.id
-            card.title = item.snippet.title
-            card.url = 'https://www.youtube.com/embed/' + card.id
-            card.description = item.snippet.description
-            card.channelTitle = item.snippet.channelTitle
-            card.src = 'http://img.youtube.com/vi/' + card.id + '/0.jpg'
-            cards.push(card)
-            card.viewCount = item.statistics.viewCount
+          try {
+            if (!item.id.playlistId) {
+              var card = {}
+              card.id = item.id
+              card.title = item.snippet.title
+              card.url = 'https://www.youtube.com/embed/' + card.id
+              card.description = item.snippet.description
+              card.channelTitle = item.snippet.channelTitle
+              card.src = 'http://img.youtube.com/vi/' + card.id + '/0.jpg'
+              cards.push(card)
+              card.viewCount = item.statistics.viewCount
+            }
+          } catch (error) {
+            console.log(error)
           }
         })
       })
@@ -55,4 +58,5 @@ export default {
 <style lang="stylus">
 #home
   background white
+  margin-top 1rem
 </style>
