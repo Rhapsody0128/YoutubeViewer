@@ -15,7 +15,18 @@ export default {
 </script>
 <style lang="stylus">
 #app
-  text-align center
   color #2c3e50
-  margin-top 60px
+  background white
+  height 95%
+  margin 0
+  padding 0
+  #nav
+    height 5%
+    overflow hidden
+    background white
+html,body
+  height 110%
+  margin 0
+  padding 0
+  background white
 </style>

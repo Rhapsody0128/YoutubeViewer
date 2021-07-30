@@ -1,26 +1,129 @@
 <template lang="pug">
   #search
-    Sider
-      Menu(:theme='theme2')
-        Submenu(name='1')
-          template(slot='title')
-            Icon(type='ios-paper')
-          MenuItem(name='1-1') das
-          MenuItem(name='1-2') zz
-          MenuItem(name='1-3') ffa
-        Submenu(name='2')
-          template(slot='title')
-            Icon(type='ios-people')
-          MenuItem(name='2-1') sadasd
-          MenuItem(name='2-2') zc
-        Submenu(name='3')
-          template(slot='title')
-            Icon(type='ios-stats')
-          menugroup(title='使用')
-            MenuItem(name='3-1') fsadf
-            MenuItem(name='3-2') asdasd
-            MenuItem(name='3-3') asd
-          menugroup(title='留存')
-            MenuItem(name='3-4') asd
-            MenuItem(name='3-5') asdas
+    Layout.sider
+      Sider.sider(breakpoint="md" v-model="isCollapsed" collapsible :collapsed-width="0")
+        div(slot='trigger')
+        Menu.menu(width="auto")
+          h1 搜尋條件
+          Submenu(name='1')
+            template(slot='title')
+              h2 影片長度
+            RadioGroup(v-model='videoDuration' vertical size='large')
+              Radio(label='any')
+                span 任意
+              Radio(label='long')
+                span 短
+              Radio(label='medium')
+                span 中
+              Radio(label='short')
+                span 長
+          Submenu(name='2')
+            template(slot='title')
+              h2 直播狀態
+            RadioGroup(v-model='eventType' vertical size='large')
+              Radio(label='none')
+                span 無直播
+              Radio(label='completed')
+                span 已完成
+              Radio(label='live')
+                span 直播中
+              Radio(label='upcoming')
+                span 即將推出
+          Submenu(name='3')
+            template(slot='title')
+              h2 搜尋權重
+            RadioGroup(v-model='order' vertical size='large')
+              Radio(label='relevance')
+                span 相關性
+              Radio(label='date')
+                span 上傳日期
+              Radio(label='title')
+                span 標題字
+              Radio(label='viewCount')
+                span 瀏覽數
+              Radio(label='rating')
+                span 評分
+          Button(style="margin:50px" type="primary" icon="ios-search" @click='search()') Search
+      Layout.contentanier
+        Header.header
+          Row.search(:gutter="8" type="flex" justify="center")
+            Col(:xs="20" :md="10")
+              Input(v-model='searchValue' placeholder='今天想看...' :clearable='true')
+            Col(:xs="20" :md="1")
+              Button(type="primary" icon="ios-search" @click='search()') Search
+        Content
+          Row(:gutter="8" type="flex" justify="start")
+            Col(v-for="(card , index) in cards" :key='index' span="24")
+              YoutubeCard(:data="card" :type='1')
 </template>
+<script>
+export default {
+  data () {
+    return {
+      isCollapsed: false,
+      searchValue: '',
+      videoDuration: 'any',
+      eventType: 'none',
+      order: 'relevance',
+      cards: []
+    }
+  },
+  methods: {
+    search () {
+      const request = window.gapi.client.youtube.search.list({
+        part: [
+          'snippet'
+        ],
+        eventType: this.eventType,
+        maxResults: 10,
+        order: this.order,
+        q: this.searchValue,
+        regionCode: 'TW',
+        type: [
+          'video'
+        ],
+        videoDuration: this.videoDuration
+      })
+      var cards = []
+      request.execute(function (response) {
+        response.items.map(item => {
+          if (!item.id.playlistId) {
+            var card = {}
+            card.id = item.id.videoId
+            card.title = item.snippet.title
+            card.url = 'https://www.youtube.com/embed/' + card.id
+            card.description = item.snippet.description
+            card.channelTitle = item.snippet.channelTitle
+            card.src = 'http://img.youtube.com/vi/' + card.id + '/0.jpg'
+            cards.push(card)
+          }
+        })
+      })
+      this.cards = cards
+    }
+  },
+  async mounted () {
+    await window.gapi.client.load('youtube', 'v3')
+    await window.gapi.client.setApiKey(process.env.VUE_APP_YOUTUBE_API)
+  }
+}
+</script>
+<style lang="stylus">
+#search
+  height 100%
+  .sider
+    padding 0.5rem
+    background white
+    z-index 1
+    height 100%
+    .menu
+      margin-top 3rem
+      background white
+  .contentanier
+    background white
+    height 100%
+  .header
+    background white
+    margin 1rem
+
+</style>

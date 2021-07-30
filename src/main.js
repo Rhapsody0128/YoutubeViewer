@@ -9,10 +9,13 @@ import 'view-design/dist/styles/iview.css'
 import dotenv from 'dotenv'
 import YoutubeCard from './components/YoutubeCard.vue'
 
+import VueYoutube from 'vue-youtube'
+
 dotenv.config()
 require('dotenv').config()
 
 Vue.use(ViewUI)
+Vue.use(VueYoutube)
 
 Vue.component('YoutubeCard', YoutubeCard)
 
