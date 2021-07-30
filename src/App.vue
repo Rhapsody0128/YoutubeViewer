@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     // v-if='name.length>0'
-    // v-else
+    // v-els
     async login () {
       await window.gapi.auth2.getAuthInstance()
         .signIn({ scope: 'https://www.googleapis.com/auth/youtube.readonly' })
