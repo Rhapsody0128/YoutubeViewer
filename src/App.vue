@@ -27,16 +27,17 @@ export default {
   },
   methods: {
     // v-if='name.length>0'
-    // v-els
     async login () {
+      var name = ''
       await window.gapi.auth2.getAuthInstance()
         .signIn({ scope: 'https://www.googleapis.com/auth/youtube.readonly' })
         .then(function (res) {
-          this.name = res.Ts.TR
+          name = res.Ts.TR
           console.log('Sign-in successful')
         }, function (err) {
           console.error('Error signing in', err)
         })
+      this.name = name
     },
     checkLogout () {
       this.confirmLogout = true
@@ -50,10 +51,9 @@ export default {
       this.name = ''
     }
   },
-  mounted () {
-    window.gapi.load('client:auth2', function () {
-      window.gapi.auth2.init({ client_id: process.env.VUE_APP_CLIENT_ID })
-    })
+  async mounted () {
+    await window.gapi.load('client:auth2')
+    await window.gapi.auth2.init({ client_id: process.env.VUE_APP_CLIENT_ID })
   }
 }
 </script>
