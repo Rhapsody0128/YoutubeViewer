@@ -50,7 +50,6 @@ export default {
       }
     },
     async setApi () {
-      console.log(window.gapi.auth2);
       try {
         await window.gapi.client.load('youtube', 'v3')
         window.gapi.client.setApiKey(process.env.VUE_APP_YOUTUBE_API)
