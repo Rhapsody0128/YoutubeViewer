@@ -15,7 +15,8 @@
             Avatar(size="45" style="color: #f56a00;background-color: #fde3cf") {{name}}
           .googleInfo(v-else @click="login()")
             Avatar(icon="ios-person" size="45")
-    router-view
+    keep-alive
+      router-view
 </template>
 <script src="https://apis.google.com/js/api.js"></script>
 <script src="https://apis.google.com/js/client.js"></script>
@@ -41,6 +42,7 @@ export default {
           console.error('Error signing in', err)
         })
       this.name = name
+      window.gapi.auth2.getAuthInstance().disconnect()
     },
     checkLogout () {
       this.confirmLogout = true
@@ -50,7 +52,6 @@ export default {
     },
     logout () {
       this.confirmLogout = false
-      window.gapi.auth2.getAuthInstance().disconnect()
       this.name = ''
     }
   },
