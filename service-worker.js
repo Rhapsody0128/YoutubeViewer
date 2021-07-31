@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.0f94fdcccf7cfc52eec2ea4441f3fcfd.js"
+  "precache-manifest.3a74a19fde2e6f0096e6dd051f462fbc.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "youtube_viewer"});
