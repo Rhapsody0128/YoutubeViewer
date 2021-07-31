@@ -39,14 +39,7 @@ export default {
         window.gapi.auth2.getAuthInstance()
           .signIn()
           .then(function (res) {
-            console.log(res)
-            console.log(res.Ts)
-            console.log(JSON.stringify(res.Ts))
-            console.log(res.Ts.Me);
-            console.log(JSON.stringify(res.Ts.Me))
-            console.log(res.Ts.Mx.Me);
-            console.log(JSON.stringify(res.Ts.Mx.Me))
-            name = res.Ts
+            name = res.Ts.Me
             console.log('Sign-in successful')
           }, function (err) {
             console.error('Error signing in', err)

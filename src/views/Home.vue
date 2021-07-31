@@ -49,23 +49,21 @@ export default {
         this.cards = cards
       }
     },
-    setApi () {
-      if(this.dataReady){
-        return new Promise(function (resolve, reject) {
-          try {
-            gapi.client.load('youtube', 'v3', resolve)
-            gapi.client.setApiKey(process.env.VUE_APP_YOUTUBE_API)
-          } catch (error) {
-            console.log(error);
-          }
-        })
+    async setApi () {
+      try {
+        await window.gapi.client.load('youtube', 'v3')
+        window.gapi.client.setApiKey(process.env.VUE_APP_YOUTUBE_API)
+        this.dataReady = true
+      } catch (error) {
+        console.log(error);
+        this.$router.go(0)
       }
     }
   },
   mounted: async function () {
     // await window.gapi.client.load('youtube', 'v3')
     // await window.gapi.client.setApiKey(process.env.VUE_APP_YOUTUBE_API)
-    this.dataReady = true
+
     await this.setApi()
     this.recommend()
   }
