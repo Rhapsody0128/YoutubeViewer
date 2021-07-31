@@ -61,8 +61,8 @@ export default {
     }
   },
   mounted: async function () {
-    // await window.gapi.client.load('youtube', 'v3')
-    // await window.gapi.client.setApiKey(process.env.VUE_APP_YOUTUBE_API)
+    await window.gapi.client.load('youtube', 'v3')
+    await window.gapi.client.setApiKey(process.env.VUE_APP_YOUTUBE_API)
 
     await this.setApi()
     this.recommend()

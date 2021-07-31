@@ -56,6 +56,8 @@ export default {
     }
   },
   mounted () {
+    window.gapi.client.load('youtube', 'v3')
+    window.gapi.client.setApiKey(process.env.VUE_APP_YOUTUBE_API)
   }
 }
 </script>
