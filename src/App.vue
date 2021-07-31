@@ -11,9 +11,9 @@
         MenuItem(name="search" to="/Search")
           h1 搜尋
         MenuItem.login(name="login" )
-          .googleInfo(@click="checkLogout()")
+          .googleInfo(v-if='name.length>0' @click="checkLogout()")
             Avatar(size="45" ) {{name}}
-          .googleInfo(@click="login()")
+          .googleInfo(v-else @click="login()")
             Avatar(icon="ios-person" size="45")
     router-view()
 </template>
@@ -28,23 +28,22 @@ export default {
     }
   },
   methods: {
-    // v-if='name.length>0'
     async login () {
       var name = ''
-      await window.gapi.load('auth2', function() {
+      window.gapi.load('auth2',function() {
         window.gapi.auth2.init({
           apiKey: process.env.VUE_APP_YOUTUBE_API,
           clientId: process.env.VUE_APP_CLIENT_ID,
         })
-        window.gapi.auth2.getAuthInstance()
-          .signIn()
-          .then(function (res) {
-            name = res.Ts.Me
-            console.log('Sign-in successful')
-          }, function (err) {
-            console.error('Error signing in', err)
-          })
       });
+      await window.gapi.auth2.getAuthInstance()
+        .signIn()
+        .then(async function (res) {
+          name = res.Ts.Me
+          console.log('Sign-in successful')
+        }, function (err) {
+          console.error('Error signing in', err)
+        })
       this.name = name
     },
     checkLogout () {
