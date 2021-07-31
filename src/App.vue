@@ -40,14 +40,12 @@ export default {
           .signIn()
           .then(function (res) {
             console.log(res)
-            console.log(JSON.stringify(res))
-            console.log(JSON.stringify(res).Ts)
             console.log(res.Ts)
             console.log(JSON.stringify(res.Ts))
-            console.log(res.Ts.mx);
-            console.log(JSON.stringify(res.Ts.mx))
-            console.log(res.Ts.me);
-            console.log(res.Ts.mx[0]);
+            console.log(res.Ts.Me);
+            console.log(JSON.stringify(res.Ts.Me))
+            console.log(res.Ts.Mx.Me);
+            console.log(JSON.stringify(res.Ts.Mx.Me))
             name = res.Ts
             console.log('Sign-in successful')
           }, function (err) {

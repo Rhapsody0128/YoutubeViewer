@@ -4,7 +4,7 @@
       Col(v-for="(card , index) in cards" :key='index' :xs="24" :sm="12" :md="12" :lg="8" :xl="6" :xxl="6")
         YoutubeCard(:data="card" :type='0')
 </template>
-<script src="https://apis.google.com/js/client.js?onload=onClientLoad"></script>
+<script src="https://apis.google.com/js/client.js"></script>
 <script>
 export default {
   data: function () {
@@ -50,18 +50,23 @@ export default {
       }
     },
     setApi () {
-      return new Promise(function (resolve, reject) {
-        window.gapi.client.load('youtube', 'v3', resolve)
-        window.gapi.client.setApiKey(process.env.VUE_APP_YOUTUBE_API)
-      })
-      this.dataReady = true
+      if(this.dataReady){
+        return new Promise(function (resolve, reject) {
+          try {
+            gapi.client.load('youtube', 'v3', resolve)
+            gapi.client.setApiKey(process.env.VUE_APP_YOUTUBE_API)
+          } catch (error) {
+            console.log(error);
+          }
+        })
+      }
     }
   },
   mounted: async function () {
     // await window.gapi.client.load('youtube', 'v3')
     // await window.gapi.client.setApiKey(process.env.VUE_APP_YOUTUBE_API)
-    await this.setApi()
     this.dataReady = true
+    await this.setApi()
     this.recommend()
   }
 }

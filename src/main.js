@@ -10,12 +10,19 @@ import dotenv from 'dotenv'
 import YoutubeCard from './components/YoutubeCard.vue'
 
 import VueYoutube from 'vue-youtube'
+import VueGoogleApi from 'vue-google-api'
 
 dotenv.config()
 require('dotenv').config()
 
 Vue.use(ViewUI)
 Vue.use(VueYoutube)
+Vue.use(VueGoogleApi, {
+  apiKey: process.env.VUE_APP_YOUTUBE_API,
+  clientId: process.env.VUE_APP_CLIENT_ID,
+  scope: 'https://apis.google.com/js/client.js',
+  discoveryDocs: ['https://apis.google.com/js/client.js']
+})
 
 Vue.component('YoutubeCard', YoutubeCard)
 
