@@ -45,12 +45,21 @@ export default {
         })
       })
       this.cards = cards
+    },
+    setApi () {
+      return new Promise(function (resolve, reject) {
+        window.gapi.client.load('youtube', 'v3', resolve)
+        window.gapi.client.setApiKey(process.env.VUE_APP_YOUTUBE_API)
+      })
     }
   },
   async mounted () {
-    await window.gapi.client.load('youtube', 'v3')
-    await window.gapi.client.setApiKey(process.env.VUE_APP_YOUTUBE_API)
-    this.recommend()
+    // await window.gapi.client.load('youtube', 'v3')
+    // await window.gapi.client.setApiKey(process.env.VUE_APP_YOUTUBE_API)
+    await this.setApi()
+    setTimeout(() => {
+      this.recommend()
+    }, 100)
   }
 }
 

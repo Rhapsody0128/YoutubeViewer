@@ -40,7 +40,10 @@ export default {
         window.gapi.auth2.getAuthInstance()
           .signIn({ scope: 'https://www.googleapis.com/auth/youtube.readonly' })
           .then(function (res) {
-            name = res.Ts.mx.Me
+            console.log(res.Ts.mx);
+            console.log(res.Ts.me);
+            console.log(res.Ts.mx[0]);
+            name = res
             console.log('Sign-in successful')
           }, function (err) {
             console.error('Error signing in', err)
