@@ -45,7 +45,7 @@ export default {
           name = res.Ts.Me
           console.log('Sign-in successful')
         }, function (err) {
-          console.error('Error signing in', err)
+          console.log('Error signing in', err)
         })
       this.$store.commit('login',name)
       window.gapi.auth2.getAuthInstance().disconnect()
