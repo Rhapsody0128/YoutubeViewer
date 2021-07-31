@@ -31,12 +31,8 @@ export default {
   methods: {
     async login () {
       var name = ''
-      window.gapi.load('auth2',function() {
-        window.gapi.auth2.init({
-          apiKey: process.env.VUE_APP_YOUTUBE_API,
-          clientId: process.env.VUE_APP_CLIENT_ID,
-        })
-      });
+      window.gapi.load('auth2')
+      await window.gapi.auth2.init({apiKey: process.env.VUE_APP_YOUTUBE_API,clientId: process.env.VUE_APP_CLIENT_ID})
       await window.gapi.auth2.getAuthInstance()
         .signIn()
         .then(async function (res) {
