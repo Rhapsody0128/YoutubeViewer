@@ -35,10 +35,10 @@ export default {
       await window.gapi.auth2.init({
         apiKey: process.env.VUE_APP_YOUTUBE_API,
         clientId: process.env.VUE_APP_CLIENT_ID,
-        scope:'https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest'
+        scope:'https://www.googleapis.com/discovery/v1/apis/youtube/v3'
         })
       await window.gapi.auth2.getAuthInstance()
-        .signIn({scope:'https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest'})
+        .signIn({scope:'https://www.googleapis.com/discovery/v1/apis/youtube/v3'})
         .then(async function (res) {
           name = res.Ts.Me
           console.log('Sign-in successful')
