@@ -106,7 +106,7 @@ export default {
   },
   async mounted () {
     await window.gapi.client.load('youtube', 'v3')
-    await window.gapi.client.setApiKey(process.env.VUE_APP_YOUTUBE_API)
+    window.gapi.client.setApiKey(process.env.VUE_APP_YOUTUBE_API)
     this.getData()
     this.playVideo()
     this.searchRelatedVideo()

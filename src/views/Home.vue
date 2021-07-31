@@ -61,7 +61,6 @@ export default {
     }
   },
   mounted: async function () {
-
     await this.setApi()
     this.recommend()
   }
