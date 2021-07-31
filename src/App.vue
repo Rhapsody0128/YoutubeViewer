@@ -35,15 +35,20 @@ export default {
         window.gapi.auth2.init({
           apiKey: process.env.VUE_APP_YOUTUBE_API,
           clientId: process.env.VUE_APP_CLIENT_ID,
-          scope:'https://www.googleapis.com/auth/youtube.readonly'
         })
         window.gapi.auth2.getAuthInstance()
-          .signIn({ scope: 'https://www.googleapis.com/auth/youtube.readonly' })
+          .signIn()
           .then(function (res) {
+            console.log(res)
+            console.log(JSON.stringify(res))
+            console.log(JSON.stringify(res).Ts)
+            console.log(res.Ts)
+            console.log(JSON.stringify(res.Ts))
             console.log(res.Ts.mx);
+            console.log(JSON.stringify(res.Ts.mx))
             console.log(res.Ts.me);
             console.log(res.Ts.mx[0]);
-            name = res
+            name = res.Ts
             console.log('Sign-in successful')
           }, function (err) {
             console.error('Error signing in', err)
