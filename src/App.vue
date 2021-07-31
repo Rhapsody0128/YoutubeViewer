@@ -32,9 +32,13 @@ export default {
     async login () {
       var name = ''
       window.gapi.load('auth2')
-      await window.gapi.auth2.init({apiKey: process.env.VUE_APP_YOUTUBE_API,clientId: process.env.VUE_APP_CLIENT_ID})
+      await window.gapi.auth2.init({
+        apiKey: process.env.VUE_APP_YOUTUBE_API,
+        clientId: process.env.VUE_APP_CLIENT_ID,
+        scope:'https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest'
+        })
       await window.gapi.auth2.getAuthInstance()
-        .signIn()
+        .signIn({scope:'https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest'})
         .then(async function (res) {
           name = res.Ts.Me
           console.log('Sign-in successful')
@@ -54,10 +58,6 @@ export default {
       window.gapi.auth2.getAuthInstance().disconnect()
       this.name = ''
     }
-  },
-  mounted () {
-    window.gapi.client.load('youtube', 'v3')
-    window.gapi.client.setApiKey(process.env.VUE_APP_YOUTUBE_API)
   }
 }
 </script>
