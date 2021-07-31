@@ -53,13 +53,11 @@ export default {
       })
     }
   },
-  async mounted () {
+  mounted: async function () {
     // await window.gapi.client.load('youtube', 'v3')
     // await window.gapi.client.setApiKey(process.env.VUE_APP_YOUTUBE_API)
     await this.setApi()
-    setTimeout(() => {
-      this.recommend()
-    }, 100)
+    this.recommend()
   }
 }
 
