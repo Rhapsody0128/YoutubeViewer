@@ -25,23 +25,31 @@ export default {
   data () {
     return {
       confirmLogout: false,
-      name: ''
+    }
+  },
+  computed:{
+    name () {
+      console.log(this.$store.getters.getName);
+      return this.$store.getters.getName
     }
   },
   methods: {
     async login () {
       var name = ''
       window.gapi.load('auth2')
-      await window.gapi.auth2.init({apiKey: process.env.VUE_APP_YOUTUBE_API,clientId: process.env.VUE_APP_CLIENT_ID})
-      await window.gapi.auth2.getAuthInstance()
-        .signIn()
-        .then(async function (res) {
+      this.$store.commit('login',name)
+      await window.gapi.auth2.init({
+        apiKey: process.env.VUE_APP_YOUTUBE_API,
+        clientId: process.env.VUE_APP_CLIENT_ID
+      })
+      await window.gapi.auth2.getAuthInstance().signIn().then(async function (res) {
           name = res.Ts.Me
           console.log('Sign-in successful')
         }, function (err) {
+          name = 'asda'
           console.error('Error signing in', err)
         })
-      this.name = name
+      this.$store.commit('login',name)
       window.gapi.auth2.getAuthInstance().disconnect()
     },
     checkLogout () {
@@ -52,7 +60,7 @@ export default {
     },
     logout () {
       this.confirmLogout = false
-      this.name = ''
+      this.$store.commit('logout')
     }
   },
   mounted () {
