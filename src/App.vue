@@ -29,7 +29,6 @@ export default {
   },
   computed:{
     name () {
-      console.log(this.$store.getters.getName);
       return this.$store.getters.getName
     }
   },
@@ -46,7 +45,6 @@ export default {
           name = res.Ts.Me
           console.log('Sign-in successful')
         }, function (err) {
-          name = 'asda'
           console.error('Error signing in', err)
         })
       this.$store.commit('login',name)
@@ -63,8 +61,6 @@ export default {
       this.$store.commit('logout')
     }
   },
-  mounted () {
-  }
 }
 </script>
 <style lang="stylus">

@@ -52,11 +52,13 @@ export default {
     async setApi () {
       try {
         await window.gapi.client.load('youtube', 'v3')
-        window.gapi.client.setApiKey(process.env.VUE_APP_YOUTUBE_API)
+        await window.gapi.client.setApiKey(process.env.VUE_APP_YOUTUBE_API)
         this.dataReady = true
       } catch (error) {
         console.log(error);
-        this.$router.go(0)
+        setTimeout(() => {
+          this.$router.go(0)
+        }, 3000);
       }
     }
   },
