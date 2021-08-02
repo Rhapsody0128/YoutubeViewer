@@ -11,11 +11,11 @@
             RadioGroup(v-model='videoDuration' vertical size='large')
               Radio(label='any')
                 span 任意
-              Radio(label='long')
+              Radio(label='short')
                 span 短
               Radio(label='medium')
                 span 中
-              Radio(label='short')
+              Radio(label='long')
                 span 長
           Submenu(name='2')
             template(slot='title')
@@ -24,7 +24,7 @@
               Radio(label='none')
                 span 無直播
               Radio(label='completed')
-                span 已完成
+                span 已下播
               Radio(label='live')
                 span 直播中
               Radio(label='upcoming')
