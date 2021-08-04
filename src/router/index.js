@@ -9,6 +9,9 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+    meta: {
+      keepAlive: false
+    }
   },
   {
     path: '/search',
@@ -18,7 +21,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Search.vue')
     meta: {
-      keepAlive: true // 需要被缓存
+      keepAlive: true
     }
   },
   {
@@ -28,6 +31,9 @@ const routes = [
     // this generates a separate chunk (player.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Player.vue')
+    meta: {
+      keepAlive: false
+    }
   }
 ]
 
