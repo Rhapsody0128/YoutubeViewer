@@ -8,7 +8,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
     meta: {
       keepAlive: false
     }
@@ -19,7 +19,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (search.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Search.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Search.vue'),
     meta: {
       keepAlive: true
     }
@@ -30,7 +30,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (player.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Player.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Player.vue'),
     meta: {
       keepAlive: false
     }
