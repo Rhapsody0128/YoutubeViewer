@@ -33,6 +33,7 @@ export default {
   },
   methods: {
     play (id) {
+      this.$router.go(0)
       this.$router.push({
         name: 'Player',
         query: { id: id }
