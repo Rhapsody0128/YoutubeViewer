@@ -17,7 +17,7 @@
             Avatar(icon="ios-person" size="45")
     keep-alive
       router-view(v-if='$route.meta.keepAlive')
-    router-view(v-if='!$route.meta.keepAlive')
+    router-view(v-else-if='!$route.meta.keepAlive')
 </template>
 <script src="https://apis.google.com/js/api.js"></script>
 <script src="https://apis.google.com/js/client.js"></script>
