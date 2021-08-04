@@ -15,8 +15,7 @@
             Avatar(size="45" style="color: #f56a00;background-color: #fde3cf") {{name}}
           .googleInfo(v-else @click="login()")
             Avatar(icon="ios-person" size="45")
-    keep-alive
-      router-view
+    router-view
 </template>
 <script src="https://apis.google.com/js/api.js"></script>
 <script src="https://apis.google.com/js/client.js"></script>
